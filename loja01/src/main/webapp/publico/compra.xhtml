@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!-- Bootstrap core CSS -->
+	<link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+	<!-- Custom styles for this template -->
+	<link href="resources/css/starter-template.css" rel="stylesheet" />
+	<title>Compras</title>
+</h:head>
+<h:body>
+
+	<!-- Menu -->
+	<h:panelGrid columns="1" cellpadding="0" style="float:left;" borde="1">
+		<h:form id="form">
+			<div>
+
+				<div>
+
+					<p:menubar style="float:none;">
+						<p:menuitem value="Home  |"
+							url="#{resquest.contextPath}/publico/index.xhtml" />
+
+						<p:menuitem value="Área do Administrador"
+							url="#{resquest.contextPath}/admin/principal.xhtml" />
+					</p:menubar>
+				</div>
+
+				<h:panelGrid columns="1" style="float:none;" />
+				<h:panelGrid>
+					<h:panelGrid columns="17" cellpadding="0" style="float:none;"
+						border="0">
+						<h:graphicImage value="#{resource['/imagens/logo.png']}"
+							height="100" width="300" />
+						<p:inputText id="name" />
+
+						<p:commandButton value="Pesquisar" update="display"
+							icon="ui-icon-check" />
+						<h:outputText id="display" value="#{basicView.text}" />
+
+						<p:link outcome="/cliente/principal.xhtml"
+							value="Olá, Faça seu login">
+							<f:param name="acesso" value="3" />
+						</p:link>
+				| 
+				<p:link outcome="/publico/form_pessoa.xhtml" value="Cadastre-se">
+							<f:param name="Cadastro" value="2" />
+						</p:link>
+				| 
+				<h:graphicImage value="#{resource['/imagens/carrinho.png']}"
+							height="30" width="30" />
+						<p:link outcome="/publico/compra.xhtml" value="Carrinho">
+							<f:param name="carrinho" value="1" />
+						</p:link>
+					</h:panelGrid>
+
+					<!-- Inicio do codigo -->
+
+
+				</h:panelGrid>
+
+				<div align="left">
+
+					<p:dataTable value="#{ItensCtrl.listagem}" var="compra">
+
+						<p:column headerText="">
+							<p:graphicImage name="imagens/celulares/#{produto.marca}.jpg"
+								height="90" width="90" />
+
+
+							<p:column headerText="id">
+								<h:outputText value="#{compra.id}" />
+							</p:column>
+							</p:column>
+
+
+						<p:column headerText="">
+							<h5 class="mt-0">
+								A vista de R$
+								<h:outputText value="#{compra.vista}" />
+							</h5>
+							<h6 class="mt-0" style="color: red;">
+								ou R$
+								<h:outputText value="#{compra.preco}" />
+								Até 12x s/ juros
+							</h6>
+						</p:column>		
+						
+						<p:commandButton value="Gravar" action="#{vendaBean.finalizarVenda}"></p:commandButton>
+                        <p:commandButton value="Limpar" action="#{vendaBean.limparCampos}"></p:commandButton>
+					
+					</p:dataTable>
+				</div>
+			</div>
+		</h:form>
+	</h:panelGrid>
+</h:body>
+</html>
